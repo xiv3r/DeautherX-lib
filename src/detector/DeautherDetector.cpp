@@ -11,18 +11,13 @@ DeautherDetector::DeautherDetector() {
     _instance = this;
 }
 
-void DeautherDetector::begin(Config cfg) {
+void DeautherDetector::begin(DetectorConfig cfg) {
     _cfg = cfg;
     _running = true;
     _attacked = false;
     _attack_counter = 0;
     _pkt_rate_counter = 0;
     _pkt_rate_result = 0;
-
-    if (_cfg.led_pin >= 0) {
-        pinMode(_cfg.led_pin, OUTPUT);
-        digitalWrite(_cfg.led_pin, _cfg.led_invert ? HIGH : LOW);
-    }
 
     _last_update = millis();
     _last_hop = millis();
@@ -35,9 +30,6 @@ void DeautherDetector::begin(Config cfg) {
 void DeautherDetector::stop() {
     _running = false;
     DRadio::disablePromiscuous();
-    if (_cfg.led_pin >= 0) {
-        digitalWrite(_cfg.led_pin, _cfg.led_invert ? HIGH : LOW);
-    }
 }
 
 void DeautherDetector::update() {
@@ -120,16 +112,10 @@ void DeautherDetector::_handlePacket(uint8_t* buf, uint16_t len) {
 
 void DeautherDetector::_startAttack() {
     _attacked = true;
-    if (_cfg.led_pin >= 0) {
-        digitalWrite(_cfg.led_pin, _cfg.led_invert ? LOW : HIGH);
-    }
     if (_start_cb) _start_cb();
 }
 
 void DeautherDetector::_stopAttack() {
     _attacked = false;
-    if (_cfg.led_pin >= 0) {
-        digitalWrite(_cfg.led_pin, _cfg.led_invert ? HIGH : LOW);
-    }
     if (_stop_cb) _stop_cb();
 }

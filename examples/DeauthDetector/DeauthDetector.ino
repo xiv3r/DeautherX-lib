@@ -13,23 +13,26 @@ DeautherDetector detector;
 
 void onAttackStarted() {
   Serial.println("!!! ATTACK DETECTED !!!");
+  digitalWrite(2, LOW); // Turn on built-in LED
 }
 
 void onAttackStopped() {
   Serial.println("... attack stopped ...");
+  digitalWrite(2, HIGH); // Turn off built-in LED
 }
 
 void setup() {
   Serial.begin(115200);
   Serial.println("\nDeautherX - Deauth Detector");
+  
+  pinMode(2, OUTPUT);
+  digitalWrite(2, HIGH); // Turn off initially
 
   // Configuration
-  DeautherDetector::Config cfg;
+  DetectorConfig cfg;
   cfg.channels = DCHANNEL_COMMON; // Scan channels 1-11
   cfg.pkt_rate = 5;               // Alert if > 5 packets/cycle
   cfg.pkt_time = 1;               // Number of detection cycles to trigger alert
-  cfg.led_pin  = 2;               // Built-in LED on ESP-12
-  cfg.led_invert = true;          // ESP-12 LED is active-low
 
   // Setup callbacks
   detector.onAttackStarted(onAttackStarted);

@@ -6,6 +6,16 @@
 #include <Arduino.h>
 
 /**
+ * DetectorConfig — settings for DeautherDetector monitor.
+ */
+struct DetectorConfig {
+    uint16_t channels    = 0x3FFF;  ///< Channel bitmask (1-14)
+    uint32_t pkt_rate    = 5;       ///< Min packets/s to flag an attack
+    uint32_t pkt_time    = 1;       ///< Min detector cycles before attack started
+    uint16_t ch_time     = 140;     ///< Time in ms spent on each channel
+};
+
+/**
  * DeautherDetector — Background deauth/disassoc attack monitor.
  * 
  * Ported from spacehuhn/DeauthDetector pattern.
@@ -13,20 +23,11 @@
  */
 class DeautherDetector {
 public:
-    struct Config {
-        uint16_t channels    = 0x3FFF;  ///< Channel bitmask (1-14)
-        uint32_t pkt_rate    = 5;       ///< Min packets/s to flag an attack
-        uint32_t pkt_time    = 1;       ///< Min detector cycles before attack started
-        uint16_t ch_time     = 140;     ///< Time in ms spent on each channel
-        int      led_pin     = 2;       ///< LED notification pin (-1 to disable)
-        bool     led_invert  = true;    ///< Invert HIGH/LOW for LED
-    };
-
     using AttackEventCb = void (*)();
 
     DeautherDetector();
 
-    void begin(Config cfg = Config{});
+    void begin(DetectorConfig cfg = DetectorConfig{});
     void stop();
     void update(); ///< MUST be called from loop()
 
@@ -39,7 +40,7 @@ public:
     void onAttackStopped(AttackEventCb cb);
 
 private:
-    Config _cfg;
+    DetectorConfig _cfg;
     bool _running = false;
     bool _attacked = false;
 
