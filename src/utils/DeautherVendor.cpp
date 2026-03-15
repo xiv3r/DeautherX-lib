@@ -2,11 +2,7 @@
    MIT License */
 
 #include "DeautherVendor.h"
-
-// Include the large OUI vendor table from v3 (reused as-is)
-// The vendor_list.h file contains: vendor_t vendor_list[] = {...};
-// where vendor_t = { uint8_t prefix[3]; const char* name; }
-#include "../../v3/esp8266_deauther/vendor_list.h"
+#include "DeautherVendor_list.h"
 
 namespace DVendor {
 

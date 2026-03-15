@@ -1,5 +1,3 @@
-s
-
 # 📡 DeautherX-lib
 
 **The Unified ESP8266 Wi-Fi Security & Testing Library**
