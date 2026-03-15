@@ -1,7 +1,8 @@
-v0.1.0
+v0.1.1
 Initial release of the merged DeautherX-lib.
 Includes full support for:
 - AP and Station scanning
 - Deauthentication and Beacon flooding
 - RSSI monitoring and raw packet sniffing
 - EvilTwin and RogueAP custom HTML portals
+- Deauthentication attack detection (background monitor)

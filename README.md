@@ -2,7 +2,7 @@
 
 **The Unified ESP8266 Wi-Fi Security & Testing Library**
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?style=for-the-badge)](https://github.com/BlackTechX011/DeautherX-lib)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg?style=for-the-badge)](https://github.com/BlackTechX011/DeautherX-lib)
 [![Platform](https://img.shields.io/badge/platform-ESP8266-green.svg?style=for-the-badge)](https://www.espressif.com/en/products/socs/esp8266)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
@@ -39,6 +39,7 @@ By stripping away all hardcoded UI elements (Web UI, OLED displays, CLI), this l
 - 🎭 **Evil Twin & Captive Portal:** Configurable Evil Twin attacks with forced captive portals and custom HTML injection.
 - 🛑 **Rogue AP:** Easily spin up fully functional Rogue Access Points (open or closed).
 - 💾 **Secure Local Storage:** Automated management of captured data (credentials, probe requests) utilizing the ESP8266 `LittleFS` file system.
+- 🛡️ **Deauth Detector:** Real-time background detection of deauthentication and disassociation attacks with event callbacks and LED signaling.
 - 🛠 **Highly Customizable:** Supply your own phishing HTML templates and scripts directly via the ESP8266 file system.
 
 ---
@@ -112,6 +113,7 @@ The library is modular by design. You can interact with specific subsystems base
 | **Attack** | `DeautherAttack` | Manages active Deauthentication and Beacon flood routines. |
 | **Evil Twin** | `DeautherEvilTwin` | Spawns forced captive portals and manages credential harvesting. |
 | **Rogue AP** | `DeautherRogueAP` | Handles basic open/closed rogue access point configurations. |
+| **Detector** | `DeautherDetector` | Background monitor for deauth/disassoc attack detection. |
 
 ---
 
@@ -122,6 +124,7 @@ Check the [`examples/`](examples/) directory for ready-to-flash sketches that de
 - 💻 **`CLIDeauther`**: A fully-featured Serial Command Line Interface. Combines scanning, attacks, and evil twin configurations into an interactive prompt.
 - 🌊 **`BeaconFlood`**: A minimal implementation demonstrating how to execute a multi-SSID beacon flood attack.
 - 🎯 **`ScanAndAttack`**: Demonstrates the programmatic, headless flow of hunting for specific Wi-Fi targets and engaging them automatically.
+- 🛡️ **`DeauthDetector`**: Demonstrates background attack detection with LED alerts and Serial logging.
 
 ---
 
